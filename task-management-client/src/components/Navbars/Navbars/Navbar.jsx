@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { AuthContext } from "../../../auth/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useContext(AuthContext);
 
   return (
-    <nav className="bg-gray-900 text-white p-4">
+    <nav className="bg-gray-900 text-white p-4 fixed w-full">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold">
-          Logo
+          Task Clr
         </Link>
 
         {/* Mobile Menu Button */}
@@ -55,15 +57,26 @@ const Navbar = () => {
               Dashboard
             </NavLink>
           </li>
-          <li>
-            <NavLink
+        </ul>
+        <div>
+          {user ? (
+            <div className="flex justify-center items-center">
+              <img
+                className="w-12 h-12 rounded-full border-2 border-white"
+                src={user?.photoURL}
+                alt="user image"
+              />
+              {/* <p>Logout</p> */}
+            </div>
+          ) : (
+            <Link
               to="/signin"
-              className="block py-2 px-4 hover:text-gray-400"
+              className="block py-2 px-4 bg-gray-50 text-gray-950"
             >
               Sign In
-            </NavLink>
-          </li>
-        </ul>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

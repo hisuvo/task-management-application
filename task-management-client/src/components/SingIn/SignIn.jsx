@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../auth/AuthProvider";
 
 const SignIn = () => {
-  const { signGoogle } = useContext(AuthContext);
+  const { signGoogle, user } = useContext(AuthContext);
+
+  console.log("user info --->", user?.displayName + " and " + user?.email);
 
   const handleGoogleSign = () => {
     signGoogle()
       .then((res) => {
-        console.log(res);
+        console.log(res.user);
       })
       .catch((error) => {
         console.log(error.code);

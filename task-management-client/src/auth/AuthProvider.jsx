@@ -18,8 +18,8 @@ const AuthProvider = ({ children }) => {
 
   // login with goolge
   const signGoogle = () => {
-    return signInWithRedirect(auth, provider);
-    // return signInWithPopup(auth, provider);
+    // return signInWithRedirect(auth, provider);
+    return signInWithPopup(auth, provider);
   };
 
   // observer function
