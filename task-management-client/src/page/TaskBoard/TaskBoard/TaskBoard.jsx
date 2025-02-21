@@ -43,6 +43,7 @@ const TaskBoard = () => {
           <h2 className="text-lg text-gray-950 font-bold text-center mb-3 capitalize">
             {category.replace("inProgress", "In Progress")}
           </h2>
+
           <div className="space-y-2">
             {tasks[category].map((task) => (
               <div
