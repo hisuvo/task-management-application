@@ -4,8 +4,8 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../page/Home/Home/Home";
 import About from "../page/About/About/About";
 import Contact from "../page/Contact/Contact/Contact";
-import Dashbord from "../page/Dashbord/Dashbord/Dashbord";
 import SignIn from "../components/SingIn/SignIn";
+import TaskManagement from "../page/TaskManagement/TaskManagement/TaskManagement";
 
 const routes = createBrowserRouter([
   {
@@ -26,8 +26,8 @@ const routes = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/dashbord",
-        element: <Dashbord />,
+        path: "/task-management",
+        element: <TaskManagement />,
       },
       {
         path: "/signin",

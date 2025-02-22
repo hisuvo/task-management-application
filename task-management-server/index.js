@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.TASK_MANAGEMENT_DB}:${process.env.TASK_MANAGEMENT_PASS}@cluster0.aiyi0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const client = new MongoClient(uri, {
@@ -21,6 +21,7 @@ const client = new MongoClient(uri, {
 
 const database = client.db("task-management");
 const userCollection = database.collection("users");
+const taskCollection = database.collection("tasks");
 
 async function run() {
   try {
@@ -36,6 +37,26 @@ async function run() {
       const result = await userCollection.insertOne(user);
       res.send(result);
       console.log(user, "user info get here");
+    });
+
+    // tasks
+    app.get("/tasks", async (req, res) => {
+      const result = await taskCollection.find().toArray();
+      res.send(result);
+    });
+
+    // tasks update
+    app.patch("/tasks/:id", async (req, res) => {
+      const { category } = req.body;
+      const taskId = req.params.id;
+      const filter = { _id: new ObjectId(taskId) };
+      const updateDoc = {
+        $set: {
+          category,
+        },
+      };
+      const result = await taskCollection.updateOne(filter, updateDoc);
+      res.send(result);
     });
 
     await client.db("admin").command({ ping: 1 });

@@ -55,10 +55,10 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/dashboard"
+              to="/task-management"
               className="block py-2 px-4 hover:text-gray-400"
             >
-              Dashboard
+              Task Management
             </NavLink>
           </li>
         </ul>
