@@ -17,7 +17,7 @@ const Error = () => {
       <p>
         Back to the{" "}
         <Link to="/" className="text-blue-500 hover:underline">
-          FLowMate
+          Task Clr
         </Link>{" "}
         to start over.
       </p>

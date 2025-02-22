@@ -6,6 +6,7 @@ import SignIn from "../components/SingIn/SignIn";
 import TaskManagement from "../page/TaskManagement/TaskManagement/TaskManagement";
 import AddTask from "../page/TaskManagement/AddTask/AddTask";
 import UpdateTask from "../page/TaskManagement/UpdateTask/UpdateTask";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -19,15 +20,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "/add-tasks",
-        element: <AddTask />,
+        element: (
+          <PrivateRoute>
+            <AddTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update-tasks/:id",
-        element: <UpdateTask />,
+        element: (
+          <PrivateRoute>
+            <UpdateTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/task-management",
-        element: <TaskManagement />,
+        element: (
+          <PrivateRoute>
+            <TaskManagement />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signin",
