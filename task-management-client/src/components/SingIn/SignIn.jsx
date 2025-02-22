@@ -1,18 +1,27 @@
 import { useContext } from "react";
 import { AuthContext } from "../../auth/AuthProvider";
+import useAxiosPublice from "../../hooks/useAxiosPublice";
 
 const SignIn = () => {
   const { signGoogle, user } = useContext(AuthContext);
-
-  console.log("user info --->", user?.displayName + " and " + user?.email);
+  const axiosPublice = useAxiosPublice();
 
   const handleGoogleSign = () => {
     signGoogle()
       .then((res) => {
-        console.log(res.user);
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        };
+
+        // Send user data to the backend
+        axiosPublice
+          .post("/users", userInfo)
+          .then((response) => console.log("User added:", response.data))
+          .catch((error) => console.log("Error:", error.code));
       })
       .catch((error) => {
-        console.log(error.code);
+        console.log("Sign-in error:", error.code);
       });
   };
 

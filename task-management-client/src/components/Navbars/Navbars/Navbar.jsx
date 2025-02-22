@@ -1,11 +1,15 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { AuthContext } from "../../../auth/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const hanldeLogOut = () => {
+    logOut();
+  };
 
   return (
     <nav className="bg-gray-900 text-white p-4 fixed w-full">
@@ -58,15 +62,18 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
+
         <div>
           {user ? (
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center gap-2">
+              <p onClick={hanldeLogOut}>
+                <LogOut />
+              </p>
               <img
-                className="w-12 h-12 rounded-full border-2 border-white"
+                className="w-8 h-8 rounded-full border-2 border-white"
                 src={user?.photoURL}
                 alt="user image"
               />
-              {/* <p>Logout</p> */}
             </div>
           ) : (
             <Link
