@@ -45,6 +45,13 @@ async function run() {
       res.send(result);
     });
 
+    // tasks add in db
+    app.post("/add-tasks", async (req, res) => {
+      const task = req.body;
+      const result = await taskCollection.insertOne(task);
+      res.send(result);
+    });
+
     // tasks update
     app.patch("/tasks/:id", async (req, res) => {
       const { category } = req.body;
