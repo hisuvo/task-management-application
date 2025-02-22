@@ -25,23 +25,40 @@ const taskCollection = database.collection("tasks");
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
 
     app.get("/users", async (req, res) => {
       const result = await userCollection.find().toArray();
       res.send(result);
     });
 
+    // ganaret user collection db
     app.post("/users", async (req, res) => {
       const user = req.body;
-      const result = await userCollection.insertOne(user);
-      res.send(result);
-      console.log(user, "user info get here");
+
+      const email = user.email;
+
+      const query = { email: email };
+
+      const isExistUser = await userCollection.findOne(query);
+      if (isExistUser) {
+        return res.send({ message: "user already exists", insertedId: null });
+      } else {
+        const result = await userCollection.insertOne(user);
+        res.send(result);
+      }
     });
 
     // tasks
     app.get("/tasks", async (req, res) => {
       const result = await taskCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.get("/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await taskCollection.findOne(filter);
       res.send(result);
     });
 
@@ -66,10 +83,30 @@ async function run() {
       res.send(result);
     });
 
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
+    // task delete
+    app.delete("/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await taskCollection.deleteOne(filter);
+      res.send(result);
+    });
+
+    app.put("/tasks/:id", async (req, res) => {
+      const task = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: task,
+      };
+
+      const result = await taskCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
+
+    // await client.db("admin").command({ ping: 1 });
+    // console.log(
+    //   "Pinged your deployment. You successfully connected to MongoDB!"
+    // );
   } finally {
     // await client.close();
   }

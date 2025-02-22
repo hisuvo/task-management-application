@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../auth/AuthProvider";
 import useAxiosPublice from "../../hooks/useAxiosPublice";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const { signGoogle, user } = useContext(AuthContext);
@@ -17,7 +18,14 @@ const SignIn = () => {
         // Send user data to the backend
         axiosPublice
           .post("/users", userInfo)
-          .then((response) => console.log("User added:", response.data))
+          .then((response) => {
+            Swal.fire({
+              icon: "success",
+              title: "Loing Success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
           .catch((error) => console.log("Error:", error.code));
       })
       .catch((error) => {
@@ -58,7 +66,7 @@ const SignIn = () => {
             ></path>
           </g>
         </svg>
-        Login with Google
+        SingIn
       </button>
     </div>
   );

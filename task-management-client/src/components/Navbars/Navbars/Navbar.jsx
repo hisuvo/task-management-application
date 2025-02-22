@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, LogOut } from "lucide-react";
 import { AuthContext } from "../../../auth/AuthProvider";
+import SignIn from "../../SingIn/SignIn";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,24 +34,11 @@ const Navbar = () => {
           }`}
         >
           <li>
-            <NavLink to="/" className="block py-2 px-4 hover:text-gray-400">
-              Home
-            </NavLink>
-          </li>
-          <li>
             <NavLink
-              to="/about"
+              to="/add-tasks"
               className="block py-2 px-4 hover:text-gray-400"
             >
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/contact"
-              className="block py-2 px-4 hover:text-gray-400"
-            >
-              Contact
+              Add Task
             </NavLink>
           </li>
           <li>
@@ -76,12 +64,7 @@ const Navbar = () => {
               />
             </div>
           ) : (
-            <Link
-              to="/signin"
-              className="block py-2 px-4 bg-gray-50 text-gray-950"
-            >
-              Sign In
-            </Link>
+            <SignIn />
           )}
         </div>
       </div>

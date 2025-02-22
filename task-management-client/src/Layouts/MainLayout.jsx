@@ -8,7 +8,7 @@ const MainLayout = () => {
       <header className="relative mb-[5rem]">
         <Navbar />
       </header>
-      <main className="flex-grow">
+      <main className="flex-grow px-2">
         <Outlet />
       </main>
       <footer>
