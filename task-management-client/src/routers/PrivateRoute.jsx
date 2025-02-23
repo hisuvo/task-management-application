@@ -15,10 +15,18 @@ const PrivateRoute = ({ children }) => {
     return children;
   }
   return (
-    <div className="max-w-2xl mx-auto min-h-screen flex flex-col justify-center items-center">
-      <h2 className="text-4xl font-bold text-center">
-        Before Sing With Google
-      </h2>
+    <div className="max-w-2xl mx-auto min-h-screen flex flex-col justify-center items-center -mt-[4rem]">
+      <div className="max-w-2xl mx-auto text-center bg-blue-50 rounded-2xl border shadow-lg p-4 md:p-8 space-y-3">
+        <h2 className="text-2xl md:text-3xl font-semibold">
+          Sign In to Continue
+        </h2>
+        <p>
+          Oops! It looks like you're not signed in. Please log in or create an
+          account to access your tasks, collaborate with your team, and stay
+          organized.
+        </p>
+        <SignIn />
+      </div>
     </div>
   );
 };

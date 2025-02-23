@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -12,7 +13,9 @@ const Home = () => {
           system. Stay organized, collaborate with your team, and get things
           done faster—all in one place!
         </p>
-        <button className="btn bg-blue-950 text-gray-50">Get Started</button>
+        <Link to={"/task-management"}>
+          <button className="btn bg-blue-950 text-gray-50">Get Started</button>
+        </Link>
       </div>
     </div>
   );
