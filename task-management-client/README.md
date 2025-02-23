@@ -1,6 +1,3 @@
-Live Link: https://task-management-a87b8.web.app/task-management
-Git Link: https://github.com/hisuvo/task-management-application
-
 ## Short Description
 
 A simple and efficient Task Management System that helps users organize, assign, and track tasks seamlessly. It provides features like task creation, prioritization, progress tracking, and collaboration to enhance productivity.

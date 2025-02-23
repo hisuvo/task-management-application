@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPublice from "../../../hooks/useAxiosPublice";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../auth/AuthProvider";
 
 const AddTask = () => {
+  const { user } = useContext(AuthContext);
+
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -18,6 +21,7 @@ const AddTask = () => {
     setTask({
       ...task,
       [name]: value,
+      email: user?.email,
     });
   };
 

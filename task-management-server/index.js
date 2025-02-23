@@ -25,7 +25,7 @@ const taskCollection = database.collection("tasks");
 
 async function run() {
   try {
-    // await client.connect();
+    await client.connect();
 
     app.get("/users", async (req, res) => {
       const result = await userCollection.find().toArray();
@@ -55,7 +55,14 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/tasks/:id", async (req, res) => {
+    app.get("/tasks/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await taskCollection.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/task/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await taskCollection.findOne(filter);
@@ -98,15 +105,14 @@ async function run() {
       const updateDoc = {
         $set: task,
       };
-
       const result = await taskCollection.updateOne(filter, updateDoc);
       res.send(result);
     });
 
-    // await client.db("admin").command({ ping: 1 });
-    // console.log(
-    //   "Pinged your deployment. You successfully connected to MongoDB!"
-    // );
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
     // await client.close();
   }

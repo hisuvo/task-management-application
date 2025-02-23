@@ -23,7 +23,7 @@ const UpdateTask = () => {
   } = useQuery({
     queryKey: ["update-task", id],
     queryFn: async () => {
-      const res = await axiosPublice.get(`/tasks/${id}`);
+      const res = await axiosPublice.get(`/task/${id}`);
       return res.data;
     },
   });
